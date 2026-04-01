@@ -4,11 +4,11 @@ go 1.25.0
 
 require (
 	github.com/andybalholm/brotli v1.2.0
-	github.com/enetx/g v1.0.222
+	github.com/enetx/g v1.0.223
 	github.com/enetx/http v1.0.28
 	github.com/enetx/http2 v1.0.26
 	github.com/enetx/http3 v1.0.7
-	github.com/klauspost/compress v1.18.4
+	github.com/klauspost/compress v1.18.5
 	github.com/quic-go/quic-go v0.59.0
 	github.com/refraction-networking/utls v1.8.3-0.20260301010127-aa6edf4b11af
 	github.com/wzshiming/socks5 v0.7.0
@@ -20,5 +20,5 @@ require (
 	github.com/quic-go/qpack v0.6.0 // indirect
 	golang.org/x/crypto v0.41.0 // indirect
 	golang.org/x/sys v0.35.0 // indirect
-	golang.org/x/text v0.34.0 // indirect
+	golang.org/x/text v0.35.0 // indirect
 )

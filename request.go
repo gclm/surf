@@ -317,6 +317,8 @@ func (req *Request) applyHeaders(
 // header order keys for the transport layer to use. Returns a filtered map containing only
 // non-pseudo headers with non-empty values.
 func updateRequestHeaderOrder[T ~string](r *Request, h g.MapOrd[T, T]) g.MapOrd[T, T] {
+	h = h.Clone()
+
 	if r.cli.builder != nil {
 		method := r.request.Method
 		if r.cli.builder.forceHTTP3 {
