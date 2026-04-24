@@ -249,7 +249,7 @@ func (rt *roundtripper) tlsHandshake(ctx context.Context, network, addr string, 
 
 	config := &utls.Config{
 		ServerName:             host,
-		InsecureSkipVerify:     true,
+		InsecureSkipVerify:     rt.ja.builder.cli.tlsConfig.InsecureSkipVerify,
 		SessionTicketsDisabled: true,
 		OmitEmptyPsk:           true,
 		KeyLogWriter:           rt.ja.builder.cli.tlsConfig.KeyLogWriter,

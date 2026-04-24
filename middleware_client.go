@@ -26,7 +26,8 @@ func defaultDialerMW(client *Client) error {
 }
 
 // defaultTLSConfigMW initializes the default TLS configuration for the surf client.
-// Configures TLS settings with insecure skip verify enabled by default for flexibility.
+// InsecureSkipVerify is true by default for compatibility with test servers and proxies.
+// Use Builder.SecureTLS() to enable certificate verification for production.
 func defaultTLSConfigMW(client *Client) error {
 	client.tlsConfig = &tls.Config{InsecureSkipVerify: true}
 	return nil

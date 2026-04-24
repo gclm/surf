@@ -49,9 +49,7 @@ func NewClient() *Client {
 	redirectPolicyMW(cli)
 
 	cli.reqMWs.add(0, defaultUserAgentMW)
-	cli.reqMWs.add(0, got101ResponseMW)
 
-	cli.respMWs.add(0, webSocketUpgradeErrorMW)
 	cli.respMWs.add(0, decodeBodyMW)
 
 	return cli

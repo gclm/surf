@@ -347,7 +347,7 @@ func TestMiddlewareRequestGot101Response(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(handler))
 	defer ts.Close()
 
-	client := surf.NewClient()
+	client := surf.NewClient().Builder().WebSocketGuard().Build().Ok()
 
 	// Test normal request
 	req := client.Get(g.String(ts.URL))
@@ -385,7 +385,7 @@ func TestMiddlewareRequestGot101ResponseEdgeCases(t *testing.T) {
 	// Most standard HTTP servers won't trigger this callback directly.
 
 	// Test that the middleware can be applied without error
-	client := surf.NewClient()
+	client := surf.NewClient().Builder().WebSocketGuard().Build().Ok()
 
 	// Simple test to verify the middleware doesn't break normal requests
 	handler := func(w http.ResponseWriter, _ *http.Request) {
@@ -425,7 +425,7 @@ func TestMiddlewareRequestGot101ResponseMiddlewareIntegration(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(handler))
 	defer ts.Close()
 
-	client := surf.NewClient()
+	client := surf.NewClient().Builder().WebSocketGuard().Build().Ok()
 	req := client.Get(g.String(ts.URL))
 
 	// Do the request to trigger middleware application
@@ -495,7 +495,7 @@ func TestMiddlewareRequestGot101ResponseWithDifferentMethods(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(handler))
 	defer ts.Close()
 
-	client := surf.NewClient()
+	client := surf.NewClient().Builder().WebSocketGuard().Build().Ok()
 
 	testCases := []struct {
 		name   string

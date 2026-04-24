@@ -60,7 +60,7 @@ func TestMiddlewareResponseWebSocketUpgradeError(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(handler))
 	defer ts.Close()
 
-	client := surf.NewClient()
+	client := surf.NewClient().Builder().WebSocketGuard().Build().Ok()
 	req := client.Get(g.String(ts.URL))
 	resp := req.Do()
 
@@ -86,7 +86,7 @@ func TestMiddlewareResponseWebSocketUpgradeNormal(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(handler))
 	defer ts.Close()
 
-	client := surf.NewClient()
+	client := surf.NewClient().Builder().WebSocketGuard().Build().Ok()
 	req := client.Get(g.String(ts.URL))
 	resp := req.Do()
 

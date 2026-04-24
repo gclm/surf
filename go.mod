@@ -3,8 +3,8 @@ module github.com/enetx/surf
 go 1.25.0
 
 require (
-	github.com/andybalholm/brotli v1.2.0
-	github.com/enetx/g v1.0.223
+	github.com/andybalholm/brotli v1.2.1
+	github.com/enetx/g v1.0.224
 	github.com/enetx/http v1.0.28
 	github.com/enetx/http2 v1.0.26
 	github.com/enetx/http3 v1.0.7

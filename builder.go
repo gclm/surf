@@ -128,6 +128,25 @@ func (b *Builder) Boundary(boundary func() g.String) *Builder {
 	return b.addCliMW(func(client *Client) error { return boundaryMW(client, boundary) }, 999)
 }
 
+// SecureTLS enables TLS certificate verification.
+// By default surf skips certificate verification (InsecureSkipVerify=true).
+// Call this for production use where certificate validation is required.
+func (b *Builder) SecureTLS() *Builder {
+	b.cli.tlsConfig.InsecureSkipVerify = false
+	return b
+}
+
+// WebSocketGuard enables middleware that blocks WebSocket upgrade responses (HTTP 101).
+// Without this, surf allows 101 Switching Protocols to pass through — compatible with
+// websocket.Dial and other WebSocket libraries that use surf.Std() as HTTPClient.
+// Enable this only if you want to explicitly reject unexpected WebSocket upgrades.
+func (b *Builder) WebSocketGuard() *Builder {
+	b.addReqMW(got101ResponseMW, 0)
+	b.addRespMW(webSocketUpgradeErrorMW, 0)
+
+	return b
+}
+
 // H2C configures the client to handle HTTP/2 Cleartext (h2c).
 func (b *Builder) H2C() *Builder { return b.addCliMW(h2cMW, 999) }
 

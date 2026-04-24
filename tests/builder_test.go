@@ -912,3 +912,31 @@ func TestBuilderTLSConfigNil(t *testing.T) {
 		t.Fatal("expected error when TLSConfig is nil")
 	}
 }
+
+// TestBuilderSecureTLS verifies that SecureTLS() disables InsecureSkipVerify.
+func TestBuilderSecureTLS(t *testing.T) {
+	t.Parallel()
+
+	// Default: InsecureSkipVerify = true
+	defaultClient := surf.NewClient().Builder().Build().Unwrap()
+	if !defaultClient.GetTLSConfig().InsecureSkipVerify {
+		t.Error("default: expected InsecureSkipVerify=true")
+	}
+
+	// With SecureTLS: InsecureSkipVerify = false
+	secureClient := surf.NewClient().Builder().SecureTLS().Build().Unwrap()
+	if secureClient.GetTLSConfig().InsecureSkipVerify {
+		t.Error("SecureTLS: expected InsecureSkipVerify=false")
+	}
+}
+
+// TestBuilderWebSocketGuard verifies that WebSocketGuard() can be enabled without panic.
+func TestBuilderWebSocketGuard(t *testing.T) {
+	t.Parallel()
+
+	// Should not panic.
+	client := surf.NewClient().Builder().WebSocketGuard().Build().Unwrap()
+	if client == nil {
+		t.Fatal("WebSocketGuard: Build() returned nil")
+	}
+}
