@@ -78,7 +78,7 @@ func (dot *DNSOverTLS) LibreDNS() *Builder {
 func (DNSOverTLS) resolver(serverName g.String, addresses ...g.String) *net.Resolver {
 	return &net.Resolver{
 		PreferGo: true,
-		Dial:     dial(serverName.Std(), g.TransformSlice(addresses, g.String.Std)...),
+		Dial:     dial(serverName.Std(), g.SliceOf(addresses...).Iter().Map(g.String.Std).Collect()...),
 	}
 }
 

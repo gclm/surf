@@ -29,11 +29,11 @@ func (h Headers) Contains(header g.String, patterns any) bool {
 					return true
 				}
 			case []string:
-				if v.ContainsAny(g.TransformSlice(ps, g.NewString).Iter().Map(g.String.Lower).Collect()...) {
+				if v.ContainsAny(g.SliceOf(ps...).Iter().Map(g.NewString).Map(g.String.Lower).Collect()...) {
 					return true
 				}
 			case g.Slice[string]:
-				if v.ContainsAny(g.TransformSlice(ps, g.NewString).Iter().Map(g.String.Lower).Collect()...) {
+				if v.ContainsAny(ps.Iter().Map(g.NewString).Map(g.String.Lower).Collect()...) {
 					return true
 				}
 			case g.Slice[g.String]:
@@ -54,7 +54,7 @@ func (h Headers) Contains(header g.String, patterns any) bool {
 // Values returns the values associated with a specified header key.
 // It wraps the Values method from the textproto.MIMEHeader type.
 func (h Headers) Values(key g.String) g.Slice[g.String] {
-	return g.TransformSlice(textproto.MIMEHeader(h).Values(key.Std()), g.NewString)
+	return g.SliceOf(textproto.MIMEHeader(h).Values(key.Std())...).Iter().Map(g.NewString).Collect()
 }
 
 // Get returns the first value associated with a specified header key.

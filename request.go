@@ -332,10 +332,10 @@ func updateRequestHeaderOrder[T ~string](r *Request, h g.MapOrd[T, T]) g.MapOrd[
 		}
 	}
 
-	headersKeys := g.TransformSlice(h.Iter().
+	headersKeys := h.Iter().
 		Keys().
-		Map(func(s T) T { return T(g.String(s).Lower()) }).
-		Collect(), func(t T) string { return string(t) })
+		Map(func(s T) string { return string(g.String(s).Lower()) }).
+		Collect()
 
 	headers, pheaders := headersKeys.Iter().Partition(func(v string) bool { return v[0] != ':' })
 
