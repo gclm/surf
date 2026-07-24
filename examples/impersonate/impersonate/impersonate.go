@@ -35,8 +35,8 @@ func main() {
 		// MacOS().
 		// IOS().
 		// Android().
-		Firefox().
-		// Chrome().
+		// Firefox().
+		Chrome().
 		// SetHeaders(map[string]string{
 		// 	"Accept-Encoding": "gzip, deflate",
 		// }).

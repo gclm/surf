@@ -48,7 +48,7 @@ func (im *Impersonate) IOS() *Impersonate {
 	return im
 }
 
-// Chrome impersonates Chrome browser v145.
+// Chrome impersonates Chrome browser v150.
 func (im *Impersonate) Chrome() *Builder {
 	v := chrome.Desktop
 	if im.os.IsMobile() {

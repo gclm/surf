@@ -213,7 +213,7 @@ func TestUserAgentMap(t *testing.T) {
 		{profiles.MacOS, "Macintosh"},
 		{profiles.Linux, "Linux"},
 		{profiles.Android, "Android"},
-		{profiles.IOS, "iPhone"},
+		{profiles.IOS, "iPad"},
 	}
 
 	for _, c := range cases {
@@ -259,8 +259,8 @@ func TestSecCHUAFormat(t *testing.T) {
 	if !strings.Contains(chrome.SecCHUA, "Chromium") {
 		t.Errorf("SecCHUA missing Chromium brand: %s", chrome.SecCHUA)
 	}
-	if !strings.Contains(chrome.SecCHUA, `v="145"`) {
-		t.Errorf("SecCHUA missing version 145: %s", chrome.SecCHUA)
+	if !strings.Contains(chrome.SecCHUA, `v="150"`) {
+		t.Errorf("SecCHUA missing version 150: %s", chrome.SecCHUA)
 	}
 }
 
@@ -270,8 +270,8 @@ func TestVariantDesktopFields(t *testing.T) {
 	if chrome.Desktop.HelloSpec == nil {
 		t.Fatal("Desktop.HelloSpec is nil")
 	}
-	if chrome.Desktop.HelloSpec != &chrome.HelloChrome_145 {
-		t.Error("Desktop.HelloSpec must point to HelloChrome_145")
+	if chrome.Desktop.HelloSpec != &chrome.HelloChrome_150 {
+		t.Error("Desktop.HelloSpec must point to HelloChrome_150")
 	}
 	if chrome.Desktop.Boundary == nil {
 		t.Error("Desktop.Boundary is nil")
@@ -293,10 +293,10 @@ func TestVariantMobileFields(t *testing.T) {
 	if chrome.Mobile.HelloSpec == nil {
 		t.Fatal("Mobile.HelloSpec is nil")
 	}
-	if chrome.Mobile.HelloSpec != &chrome.HelloChrome_145_Mobile {
-		t.Error("Mobile.HelloSpec must point to HelloChrome_145_Mobile")
+	if chrome.Mobile.HelloSpec != &chrome.HelloChrome_150_Mobile {
+		t.Error("Mobile.HelloSpec must point to HelloChrome_150_Mobile")
 	}
-	if chrome.Mobile.HelloSpec == &chrome.HelloChrome_145 {
+	if chrome.Mobile.HelloSpec == &chrome.HelloChrome_150 {
 		t.Error("Mobile.HelloSpec must NOT point to the desktop spec")
 	}
 	if chrome.Mobile.Boundary == nil {
@@ -313,12 +313,12 @@ func TestBuildHeadersDesktop(t *testing.T) {
 	h := chrome.Desktop.BuildHeaders(profiles.Windows)
 
 	checks := map[g.String]g.String{
-		":authority":           "",
-		":method":              "",
-		":path":                "",
-		":scheme":              "",
-		header.ACCEPT_ENCODING: "gzip, deflate, br, zstd",
-		header.ACCEPT_LANGUAGE: "en-US,en;q=0.9",
+		":authority":            "",
+		":method":               "",
+		":path":                 "",
+		":scheme":               "",
+		header.ACCEPT_ENCODING:  "gzip, deflate, br, zstd",
+		header.ACCEPT_LANGUAGE:  "en-US,en;q=0.9",
 		header.SEC_CH_UA_MOBILE: "?0",
 	}
 	for k, want := range checks {
